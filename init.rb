@@ -6,7 +6,7 @@ Redmine::Plugin.register :redmine_hipchat_per_project do
   name 'Redmine HipchatPerProject plugin'
   description 'Hipchat notifications for projects'
   version '0.0.1'
-  url 'http://example.com/path/to/plugin'
+  url 'https://github.com/LuckyThirteen/redmine_hipchat_per_project'
 
 	project_module :hipchat do
 		permission :view_hipchat_settings, { :hipchat => :index }
