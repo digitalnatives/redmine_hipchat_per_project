@@ -1,0 +1,28 @@
+<h2>HipChat settings</h2>
+
+<% form_tag :controller => 'hipchat', :action => 'save' do %>
+<p>
+  <%= content_tag(:label, l(:hipchat_settings_label_auth_token)) %>
+  <%= text_field_tag 'settings[auth_token]', @auth_token, :size => 30 %>
+  A token from <a href="https://www.hipchat.com/group_admin/api" target="_blank">your API tokens page</a>.
+</p>
+
+<p>
+  <%= content_tag(:label, l(:hipchat_settings_label_room_id)) %>
+  <%= text_field_tag 'settings[room_id]', @room_id, :size => 30 %>
+  Target room's ID or name.
+</p>
+
+<p>
+  <%= content_tag(:label, l(:hipchat_settings_label_notify)) %>
+  <%= check_box_tag 'settings[notify]', 1, @notify %>
+  Notify room members? Will trigger sound/popup based on user preferences.
+</p>
+
+<p>
+	<%= submit_tag l(:button_apply) %>
+</p>
+
+<% end %>
+
+<% html_title(l(:hipchat_settings_header)) -%>
