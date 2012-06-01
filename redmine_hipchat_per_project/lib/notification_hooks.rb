@@ -14,6 +14,26 @@ class NotificationHook < Redmine::Hook::Listener
     send_message text
   end
 
+  def controller_issues_edit_before_save(context={})
+    issue = context[:issue]
+    if !issue.new_record? && issue.status_id_changed?
+      @status_was = IssueStatus.find_by_id(issue.status_id_was)
+      @status_new = IssueStatus.find_by_id(issue.status_id)
+    else
+      @status_was = "new"
+      @status_new = "new"
+    end
+
+    if !issue.new_record? && issue.priority_id_changed?
+      @priority_was = IssuePriority.find_by_id(issue.priority_id_was)
+      @priority_new = IssuePriority.find_by_id(issue.priority_id)
+    else
+      @priority_was = "normal"
+      @priority_new = "normal"
+    end
+
+  end
+
   def controller_issues_edit_after_save(context={})
     issue = context[:issue]
     @settings = get_settings(issue)
@@ -25,7 +45,9 @@ class NotificationHook < Redmine::Hook::Listener
     comment = CGI::escapeHTML(context[:journal].notes)
     url     = get_url issue
     text    = "#{author} updated #{project.name} #{tracker} <a href=\"#{url}\">##{issue.id}</a>: #{subject}"
-    text   += ": <i>#{truncate(comment)}</i>" unless comment.blank?
+    text   += "<br />Priority changed form <i>#{@priority_was}</i> to <i>#{@priority_new}</i>." unless @priority_was == @priority_new
+    text   += "<br />Status changed form <i>#{@status_was}</i> to <i>#{@status_new}</i>. <br />" unless @status_was == @status_new
+    text   += "<br /> Comment: <i>#{truncate(comment)}</i>" unless comment.blank?
 
     send_message text
   end
