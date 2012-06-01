@@ -3,6 +3,8 @@ HipChat Per Project Plugin for Redmine
 
 Based on [HipChat Plugin for Redmine](https://github.com/hipchat/redmine_hipchat).
 This plugin sends messages to your HipChat rooms when issues are created or updated.
+The message contains information about issue status/priority change if there's any.
+
 
 Setup
 -----
