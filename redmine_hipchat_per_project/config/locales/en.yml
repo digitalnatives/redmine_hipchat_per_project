@@ -1,0 +1,13 @@
+en:
+  hipchat_settings_header: HipChat Plugin Configuration
+  hipchat_settings_label_room_id: Room ID
+  hipchat_settings_label_auth_token: Auth token
+  hipchat_settings_label_notify: Notify
+  hipchat_settings_label_message_color: Notify
+  hipchat_settings_color_random: random
+  hipchat_settings_color_yellow: yellow
+  hipchat_settings_color_red: red
+  hipchat_settings_color_green: green
+  hipchat_settings_color_purple: purple
+
+  hipchat_settings_label_projects: Projects

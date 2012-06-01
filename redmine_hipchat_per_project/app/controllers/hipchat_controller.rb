@@ -11,7 +11,8 @@ class HipchatController < ApplicationController
     val = @settings.value ||= {}
     val[@project.id] = { :auth_token => params[:settings][:auth_token],
                          :room_id => params[:settings][:room_id],
-                         :notify => params[:settings][:notify] }
+                         :notify => params[:settings][:notify],
+                         :message_color => params[:settings][:message_color] }
     @settings.update_attribute :value, val
     get_settings
     flash[:notice] = l(:notice_successful_update)
@@ -29,5 +30,11 @@ class HipchatController < ApplicationController
     @auth_token = @settings.value[@project.id][:auth_token] rescue nil
     @room_id = @settings.value[@project.id][:room_id] rescue nil
     @notify = @settings.value[@project.id][:notify] rescue nil
+    @colors = [ l(:hipchat_settings_color_yellow),
+                l(:hipchat_settings_color_red),
+                l(:hipchat_settings_color_green),
+                l(:hipchat_settings_color_purple),
+                l(:hipchat_settings_color_random)]
+    @selected_color = @settings.value[@project.id][:message_color] rescue nil
   end
 end

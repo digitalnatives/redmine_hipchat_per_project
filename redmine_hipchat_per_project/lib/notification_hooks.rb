@@ -53,7 +53,8 @@ private
       :room_id => @settings[:room_id],
       :notify => @settings[:notify] ? 1 : 0,
       :from => 'Redmine',
-      :message => message
+      :message => message,
+      :color => @settings[:message_color]
     })
     req["Content-Type"] = 'application/x-www-form-urlencoded'
 

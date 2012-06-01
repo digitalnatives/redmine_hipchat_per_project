@@ -4,9 +4,10 @@ require_dependency 'notification_hooks'
 
 Redmine::Plugin.register :redmine_hipchat_per_project do
   name 'Redmine HipchatPerProject plugin'
+  author 'Author name'
   description 'Hipchat notifications for projects'
   version '0.0.1'
-  url 'https://github.com/LuckyThirteen/redmine_hipchat_per_project'
+  url 'http://example.com/path/to/plugin'
 
 	project_module :hipchat do
 		permission :view_hipchat_settings, { :hipchat => :index }

@@ -20,6 +20,11 @@
 </p>
 
 <p>
+  <%= content_tag(:label, l(:hipchat_settings_label_message_color)) %>
+  <%= select_tag "settings[message_color]", options_for_select(@colors, @selected_color) %>
+</p>
+
+<p>
 	<%= submit_tag l(:button_apply) %>
 </p>
 
