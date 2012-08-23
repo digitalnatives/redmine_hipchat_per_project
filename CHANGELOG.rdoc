@@ -1,0 +1,3 @@
+== 2011-08-23 v0.1.0
+
+Birthday. Core features.
