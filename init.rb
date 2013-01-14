@@ -13,7 +13,7 @@ Redmine::Plugin.register :redmine_hipchat_per_project do
   name        'Redmine HipchatPerProject plugin'
   author      'Digital Natives'
   description 'Hipchat notifications for projects'
-  version     '0.1.0'
+  version     '0.2.0'
   url         'https://github.com/digitalnatives/redmine_hipchat_per_project'
 
 	project_module :hipchat do
