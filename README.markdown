@@ -25,7 +25,7 @@ If you're using Redmine 1.4, check out the [master branch](https://github.com/di
 Authors
 -------
 
-The plugin was written by developers of [Digital Natives team](http://www.digitalnatives.hu/english) (primary Zsofia Balogh).
+The plugin was written by developers of [Digital Natives](http://www.digitalnatives.hu/english) team (primary Zsofia Balogh).
 
 Licence
 -------
