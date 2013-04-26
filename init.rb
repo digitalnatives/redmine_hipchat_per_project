@@ -1,10 +1,9 @@
 require 'redmine'
-require 'dispatcher'
 
 require_dependency 'issue_observer_patch'
 require_dependency 'journal_observer_patch'
 
-Dispatcher.to_prepare do
+Rails.configuration.to_prepare do
   IssueObserver.instance.extend(IssueObserverPatch)
   JournalObserver.instance.extend(JournalObserverPatch)
 end

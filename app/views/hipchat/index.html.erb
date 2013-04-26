@@ -1,6 +1,6 @@
 <h2>HipChat settings</h2>
 
-<% form_tag :controller => 'hipchat', :action => 'save' do %>
+<%= form_tag :controller => 'hipchat', :action => 'save' do %>
 <p>
   <%= content_tag(:label, l(:hipchat_settings_label_auth_token)) %>
   <%= text_field_tag 'settings[auth_token]', @auth_token, :size => 30 %>
