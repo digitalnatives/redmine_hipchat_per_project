@@ -20,13 +20,13 @@ Plugin Info
 -----------
 
 This version of the plugin is compatible with Redmine 1.4 .
-If you're using Redmine 2.x, check out the [redmine2 branch](https://github.com/digitalnatives/redmine_hours/tree/redmine2).
+If you're using Redmine 2.x, check out the [redmine2 branch](https://github.com/digitalnatives/redmine_hipchat_per_project/tree/redmine2).
 
 
 Authors
 -------
 
-The plugin was written by developers of [Digital Natives team](http://www.digitalnatives.hu/english) (primary Zsofia Balogh).
+The plugin was written by developers of [Digital Natives](http://www.digitalnatives.hu/english) team (primary Zsofia Balogh).
 
 Licence
 -------
