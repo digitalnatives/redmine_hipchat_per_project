@@ -13,7 +13,7 @@ module HipchatNotifier
     return unless @settings = get_settings(issue)
     # rescue is for link_to(attachment)
     details = journal.details.map{|d| show_detail(d) rescue show_detail(d, :no_html) }.join("<br />")
-    comment = CGI::escapeHTML(journal.notes)
+    comment = CGI::escapeHTML(journal.notes.to_s)
 
     text    = headline_for_issue(issue, 'updated')
     text   += "<br /> #{details}" unless details.blank?
