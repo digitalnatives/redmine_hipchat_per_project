@@ -1,11 +1,27 @@
 require 'redmine'
 
-require_dependency 'issue_observer_patch'
-require_dependency 'journal_observer_patch'
+Issue.class_eval do
+  include HipchatNotifier
+  include ERB::Util
 
-Rails.configuration.to_prepare do
-  IssueObserver.instance.extend(IssueObserverPatch)
-  JournalObserver.instance.extend(JournalObserverPatch)
+  after_create :notify_hipchat
+
+  private
+  def notify_hipchat
+    send_issue_reported_to_hipchat self
+  end
+end
+
+Journal.class_eval do
+  include HipchatNotifier
+  include ERB::Util
+
+  after_create :notify_hipchat
+
+  private
+  def notify_hipchat
+    send_issue_updated_to_hipchat(self) if self.journalized_type.to_s == 'Issue'
+  end
 end
 
 Redmine::Plugin.register :redmine_hipchat_per_project do
