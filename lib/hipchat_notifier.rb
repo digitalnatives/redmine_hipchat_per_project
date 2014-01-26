@@ -22,6 +22,15 @@ module HipchatNotifier
     send_message text
   end
 
+  def send_message_created_to_hipchat(message)
+    return unless @settings = get_settings(message.board)
+
+    text    = headline_for_message(message)
+    text   += ": <i>#{truncate(message.content)}</i>"
+
+    send_message text
+  end
+
   private
 
   def send_message(message)
@@ -58,6 +67,19 @@ module HipchatNotifier
     end
   end
 
+  def headline_for_message(message)
+    board   = message.board
+    project = board.project
+
+    author  = CGI::escapeHTML(User.current.name)
+    forum   = CGI::escapeHTML(board.name)
+    subject = CGI::escapeHTML(message.subject)
+
+    url     = get_url(message)
+    action  = message.parent_id.nil? ? "created new subject" : "commented"
+    "#{author} #{action} on forum '#{forum}' <a href=\"#{url}\">#{message.subject}</a>"
+  end
+
   def headline_for_issue(issue, mode)
     project = issue.project
     author  = CGI::escapeHTML(User.current.name)
@@ -71,6 +93,7 @@ module HipchatNotifier
   def get_url(object)
     case object
       when Issue then "#{Setting[:protocol]}://#{Setting[:host_name]}/issues/#{object.id}"
+      when Message  then "#{Setting[:protocol]}://#{Setting[:host_name]}/boards/#{object.board.id}/topics/#{object.id}"
     else
       Rails.logger.info "Asked redmine_hipchat for the url of an unsupported object #{object.inspect}"
     end
