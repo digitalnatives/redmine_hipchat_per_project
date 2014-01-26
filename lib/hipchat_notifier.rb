@@ -76,7 +76,7 @@ module HipchatNotifier
     subject = CGI::escapeHTML(message.subject)
 
     url     = get_url(message)
-    action  = message.parent_id.nil? ? "created new subject" : "commented"
+    action  = message.parent_id.nil? ? "created new topic" : "commented"
     "#{author} #{action} on forum '#{forum}' <a href=\"#{url}\">#{message.subject}</a>"
   end
 
