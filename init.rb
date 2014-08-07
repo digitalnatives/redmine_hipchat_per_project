@@ -1,12 +1,11 @@
 require 'redmine'
-require 'dispatcher'
 
-require_dependency 'issue_observer_patch'
-require_dependency 'journal_observer_patch'
+Rails.configuration.to_prepare do
+  require_dependency 'issue_patch'
+  require_dependency 'journal_patch'
 
-Dispatcher.to_prepare do
-  IssueObserver.instance.extend(IssueObserverPatch)
-  JournalObserver.instance.extend(JournalObserverPatch)
+  Issue.send(:include, IssuePatch)
+  Journal.send(:include, JournalPatch)
 end
 
 Redmine::Plugin.register :redmine_hipchat_per_project do

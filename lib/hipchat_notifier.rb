@@ -4,6 +4,7 @@ module HipchatNotifier
   include IssuesHelper
 
   def send_issue_reported_to_hipchat(issue)
+    Rails.logger.info 'got hipchat issue'
     return unless @settings = get_settings(issue)
     send_message headline_for_issue(issue, 'reported')
   end
@@ -29,11 +30,11 @@ module HipchatNotifier
        @settings[:room_id].nil?       ||
        @settings[:auth_token].blank?  ||
        @settings[:room_id].blank?
-      RAILS_DEFAULT_LOGGER.info "Unable to send HipChat message : config missing."
+      Rails.logger.info "Unable to send HipChat message : config missing."
       return
     end
 
-    RAILS_DEFAULT_LOGGER.info "Sending message to HipChat: #{message}."
+    Rails.logger.info "Sending message to HipChat: #{message}."
 
     req = Net::HTTP::Post.new("/v1/rooms/message")
     req.set_form_data({
@@ -54,7 +55,7 @@ module HipchatNotifier
         connection.request(req)
       end
     rescue Net::HTTPBadResponse => e
-      RAILS_DEFAULT_LOGGER.error "Error hitting HipChat API: #{e}"
+      Rails.logger.error "Error hitting HipChat API: #{e}"
     end
   end
 
@@ -72,7 +73,7 @@ module HipchatNotifier
     case object
       when Issue then "#{Setting[:protocol]}://#{Setting[:host_name]}/issues/#{object.id}"
     else
-      RAILS_DEFAULT_LOGGER.info "Asked redmine_hipchat for the url of an unsupported object #{object.inspect}"
+      Rails.logger.info "Asked redmine_hipchat for the url of an unsupported object #{object.inspect}"
     end
   end
 
