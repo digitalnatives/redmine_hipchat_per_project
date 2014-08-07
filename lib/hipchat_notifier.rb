@@ -66,7 +66,7 @@ module HipchatNotifier
     subject = CGI::escapeHTML(issue.subject)
     url     = get_url issue
 
-    "#{author} #{mode} #{project.name} #{tracker} <a href=\"#{url}\">##{issue.id}</a>: #{subject}"
+    "#{author} #{mode} #{project.name} #{tracker} <a href=\"#{url}\">##{issue.id}</a>: #{subject} " + (issue.assigned_to.nil? ? '' : "assigned to #{issue.assigned_to.firstname} #{issue.assigned_to.lastname}")
   end
 
   def get_url(object)
