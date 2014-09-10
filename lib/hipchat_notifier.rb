@@ -2,6 +2,7 @@ module HipchatNotifier
   include Redmine::I18n
   include ActionView::Helpers::TagHelper
   include IssuesHelper
+  include CustomFieldsHelper
 
   def send_issue_reported_to_hipchat(issue)
     return unless @settings = get_settings(issue)
